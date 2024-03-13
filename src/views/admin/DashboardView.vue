@@ -8,7 +8,9 @@
             <RouterLink to="/">返回前台</RouterLink> |
             <a href="" @click.prevent="loginOut">登出</a>
         </nav>
-        <RouterView></RouterView>
+        <RouterView v-if="checkSuccess"></RouterView>
+        <!-- 加上 checkSuccess 判斷 -->
+        <!-- 在 DashboardView.vue 的驗證加上 checkSuccess 的狀態，避免還沒進行驗證時，就進到後台產品或訂單頁面取資料，這時會造成錯誤。 -->
     </div>
 </template>
 
@@ -18,6 +20,12 @@ import axios from 'axios'
 const { VITE_URL } = import.meta.env
 
 export default {
+  data () {
+    return {
+      // 驗證加上 checkSuccess 的狀態
+      checkSuccess: false
+    }
+  },
   methods: {
     // 登入驗證
     checkAdmin () {
@@ -25,7 +33,10 @@ export default {
       axios
         .post(url)
         .then((response) => {
+          // 驗證加上 checkSuccess 的狀態
+          this.checkSuccess = true
           console.log('驗證成功：', response.data.success)
+          alert('驗證成功：', response.data.success)
         })
         .catch(() => {
           // console.log(err.data)

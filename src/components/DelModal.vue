@@ -1,6 +1,39 @@
 <template>
+    <div id="delModal" ref="delModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content border-0">
+          <div class="modal-header bg-danger text-white">
+            <h5 id="delModalLabel" class="modal-title">
+              <span>刪除</span>
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            是否刪除
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              取消
+            </button>
+            <button type="button" class="btn btn-danger" @click="$emit('del-item')">
+              確認刪除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
-<script></script>
+<script>
+import modalMixin from '../mixins/modalMixin'
+
+export default {
+  props: {
+    item: Object
+  },
+  emits: ['del-item'],
+  mixins: [modalMixin]
+}
+</script>
 
 <style></style>

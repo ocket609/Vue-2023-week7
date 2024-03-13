@@ -14,7 +14,8 @@
                         <div class="col-md-4">
                             <h3>用戶資料</h3>
                             <table>
-                                <tbody>
+                                <tbody v-if="tempOrder.user">
+                                <!-- 在樣板加上 tempOrder.user 判斷，避免還沒有 tempOrder.user 資料時就渲染 tempOrder.uesr.xxx 而造成錯誤 -->
                                     <tr>
                                         <th>姓名</th>
                                         <td>{{ tempOrder.uesr.name }}</td>
@@ -44,12 +45,14 @@
                                     </tr>
                                     <tr>
                                         <th>下單時間</th>
-                                        <td>{{ tempOrder.create_at }}</td>
+                                        <td>{{ $filters.date(tempOrder.create_at) }}</td>
                                     </tr>
                                     <tr>
                                         <th>付款時間</th>
                                         <td>
-                                            <span class="text-success" v-if="tempOrder.paid_date"></span>
+                                            <span class="text-success" v-if="tempOrder.paid_date">
+                                                {{ $filters.date(tempOrder.paid_date) }}
+                                            </span>
                                             <span v-else>時間不正確</span>
                                         </td>
                                     </tr>
@@ -117,28 +120,28 @@ export default {
       default () {
         return {}
       }
-    },
-    data () {
-      return {
-        modal: '',
-        tempOrder: {},
-        isPaid: false
-      }
-    },
-    // eslint-disable-next-line vue/require-prop-type-constructor, no-undef
-    emits: ['update-paid'],
-    // (1) 上方 import 匯入
-    // (2) 下方 加入 mixins: [modalMixin],，就可以直接在該元件使用 modalMixin 中的開關 modal 函式
-    // 開關 modal 操作對應到 AdminOrderView
-    mixins: [modalMixin],
+    }
+  },
+  data () {
+    return {
+      modal: '',
+      tempOrder: {},
+      isPaid: false
+    }
+  },
+  // eslint-disable-next-line vue/require-prop-type-constructor, no-undef
+  emits: ['update-paid'],
+  // (1) 上方 import 匯入
+  // (2) 下方 加入 mixins: [modalMixin],，就可以直接在該元件使用 modalMixin 中的開關 modal 函式
+  // 開關 modal 操作對應到 AdminOrderView
+  mixins: [modalMixin],
 
-    // 將父元件透過 props 傳入的 order 訂單資訊使用 watch 監聽
-    watch: {
-      order () {
-        // 重新宣告一個 tempOrder 變數賦值
-        this.tempOrder = this.order
-        // 避免從子元件直接修改到父元件的資料，違反 Vue 的單向數據流原則造成錯誤
-      }
+  // 將父元件透過 props 傳入的 order 訂單資訊使用 watch 監聽
+  watch: {
+    order () {
+      // 重新宣告一個 tempOrder 變數賦值
+      this.tempOrder = this.order
+      // 避免從子元件直接修改到父元件的資料，違反 Vue 的單向數據流原則造成錯誤
     }
   }
 }
