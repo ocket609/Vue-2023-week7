@@ -1,10 +1,10 @@
 <template>
-    <div id="delModal" ref="delModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+    <div id="delModal" ref="modal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content border-0">
           <div class="modal-header bg-danger text-white">
-            <h5 id="delModalLabel" class="modal-title">
-              <span>刪除</span>
+            <h5 class="modal-title">
+              <span>刪除 {{ item.title }}</span>
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>

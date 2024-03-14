@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/require-v-for-key -->
 <template>
   <h2>訂單</h2>
   <div class="container">
@@ -23,9 +24,16 @@
             <!-- 訂單編號 -->
             <td>{{ item.id }}</td>
             <!-- 購買款項 -->
-            <td>{{  }}</td>
+            <td>
+              <p>共 {{ item.num }} 項</p>
+              <ul>
+                <li v-for="i in item.products" :key="i.id">
+                  {{ i.product.title }} / 數量：{{ i.product.unit }}
+                </li>
+              </ul>
+            </td>
             <!-- 應付金額 -->
-            <td>{{  }}</td>
+            <td>{{ item.total }}</td>
             <!-- 是否付款 -->
             <td>
               <div class="form-check">
@@ -176,8 +184,8 @@ export default {
       // 並調用 openModal 函式開啟 modal
       delComponent.openModal()
     },
-    delOrder (item) {
-      const url = `${VITE_URL}/api/${VITE_NAME}/admin/order/${item.id}`
+    delOrder () {
+      const url = `${VITE_URL}/api/${VITE_NAME}/admin/order/${this.tempOrder.id}`
       axios
         .delete(url)
         .then((res) => {
@@ -190,8 +198,8 @@ export default {
           alert(err.response.data.message)
         })
     }
-    /* delOrder (item) {
-      const url = `${VITE_URL}/api/${VITE_NAME}/admin/order/${item.id}`
+    /* delOrder () {
+      const url = `${VITE_URL}/api/${VITE_NAME}/admin/order/${this.tempOrder.id}`
       axios
         .delete(url, {
           data: this.tempOrder

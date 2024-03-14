@@ -17,19 +17,19 @@
                                 <tbody v-if="tempOrder.user">
                                 <!-- 在樣板加上 tempOrder.user 判斷，避免還沒有 tempOrder.user 資料時就渲染 tempOrder.uesr.xxx 而造成錯誤 -->
                                     <tr>
-                                        <th>姓名</th>
-                                        <td>{{ tempOrder.uesr.name }}</td>
+                                        <th>姓名：</th>
+                                        <td>{{ tempOrder.user.name }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Email</th>
+                                        <th>Email：</th>
                                         <td>{{ tempOrder.user.email }}</td>
                                     </tr>
                                     <tr>
-                                        <th>電話</th>
+                                        <th>電話：</th>
                                         <td>{{ tempOrder.user.tel }}</td>
                                     </tr>
                                     <tr>
-                                        <th>地址</th>
+                                        <th>地址：</th>
                                         <td>{{ tempOrder.user.address }}</td>
                                     </tr>
                                 </tbody>
@@ -40,15 +40,15 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <th>訂單編號</th>
+                                        <th>訂單編號：</th>
                                         <td>{{ tempOrder.id }}</td>
                                     </tr>
                                     <tr>
-                                        <th>下單時間</th>
+                                        <th>下單時間：</th>
                                         <td>{{ $filters.date(tempOrder.create_at) }}</td>
                                     </tr>
                                     <tr>
-                                        <th>付款時間</th>
+                                        <th>付款時間：</th>
                                         <td>
                                             <span class="text-success" v-if="tempOrder.paid_date">
                                                 {{ $filters.date(tempOrder.paid_date) }}
@@ -57,15 +57,15 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>付款狀態</th>
+                                        <th>付款狀態：</th>
                                         <td>
                                             <strong v-if="tempOrder.is_paid">已付款</strong>
                                             <span v-else>尚未付款</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>總金額</th>
-                                        <td>{{ tempOrder.total }}</td>
+                                        <th>總金額：</th>
+                                        <td>${{ tempOrder.total }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" @click="$emit('update-paid, tempOrder')">修改付款狀態</button>
+                    <button type="button" class="btn btn-primary" @click="$emit('update-paid', tempOrder)">修改付款狀態</button>
                     <!-- 運用 emit 自定義事件將修改好的 tempOrder 訂單資料回傳給父元件 -->
                 </div>
             </div>
