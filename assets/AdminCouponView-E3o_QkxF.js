@@ -1,0 +1,1 @@
+import{_ as o,c as n,b as t,F as c,a as r,o as s,r as a}from"./index-xH8wnEId.js";const _={},l=r("h2",null,"優惠券",-1);function i(m,u){const e=a("RouterView");return s(),n(c,null,[l,t(e)],64)}const p=o(_,[["render",i]]);export{p as default};
