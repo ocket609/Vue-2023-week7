@@ -72,13 +72,17 @@
                             <h3>選購商品</h3>
                             <table>
                                 <thead>
-                                    <tr></tr>
-                                </thead>
-                                <tbody>
                                     <tr>
-                                        <th></th>
-                                        <td></td>
-                                        <td class="text-end"></td>
+                                        <th>產品名稱</th>
+                                        <th>數量 / 單位</th>
+                                        <th>小計</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-for="item in tempOrder.products" :key="item.id">
+                                    <tr>
+                                        <th>{{ item.product.title }}</th>
+                                        <td>{{ item.qty }} / {{ item.product.unit }}</td>
+                                        <td class="text-end">${{ item.total }}</td>
                                     </tr>
                                 </tbody>
                             </table>
