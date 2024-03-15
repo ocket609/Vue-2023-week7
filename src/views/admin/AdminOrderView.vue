@@ -108,6 +108,10 @@
       </div>
     </div> -->
   </div>
+  <PaginationComponent
+    :pages = "pagination"
+    :get-products = "getOrder"
+  ></PaginationComponent>
   <RouterView></RouterView>
 </template>
 
@@ -115,6 +119,7 @@
 import axios from 'axios'
 import OrderModal from '../../components/OrderModal.vue'
 import DelModal from '../../components/DelModal.vue'
+import PaginationComponent from '../../components/PaginationComponent.vue'
 
 const { VITE_URL, VITE_NAME } = import.meta.env
 
@@ -129,7 +134,8 @@ export default {
   },
   components: {
     OrderModal,
-    DelModal
+    DelModal,
+    PaginationComponent
   },
   methods: {
     // 取得訂單
